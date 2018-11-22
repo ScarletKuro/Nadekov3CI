@@ -3,18 +3,17 @@ FROM buildpack-deps:jessie-scm
 # Install .NET CLI dependencies
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		libc6 \
-		libcurl3 \
-		libgcc1 \
-		libgssapi-krb5-2 \
-		libicu52 \
-		liblttng-ust0 \
-		libssl1.0.0 \
-		libstdc++6 \
-		libunwind8 \
-		libuuid1 \
-		zlib1g \
-		install openssh-client \
+	libc6 \
+	libcurl3 \
+	libgcc1 \
+	libgssapi-krb5-2 \
+	libicu52 \
+	liblttng-ust0 \
+	libssl1.0.0 \
+	libstdc++6 \
+	libunwind8 \
+	libuuid1 \
+	zlib1g \
 	&& rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
 	
 # Install mono
@@ -28,3 +27,5 @@ RUN echo "deb http://download.mono-project.com/repo/debian wheezy/snapshots/5.0.
 
 RUN apt-get update && apt-get install -y curl libicu-dev \
 && apt-get -q clean -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
+
+RUN which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin)
