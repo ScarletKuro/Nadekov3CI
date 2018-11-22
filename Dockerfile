@@ -1,4 +1,4 @@
-FROM buildpack-deps:jessie-scm
+FROM ubuntu:trusty
 
 # Install .NET CLI dependencies
 RUN apt-get update \
@@ -21,11 +21,11 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
 
 RUN echo "deb http://download.mono-project.com/repo/debian wheezy/snapshots/5.0.0.100 main" > /etc/apt/sources.list.d/mono-xamarin.list \
   && apt-get update \
-  && apt-get install -y mono-devel ca-certificates-mono fsharp mono-vbnc nuget git \
+  && apt-get install -y mono-devel ca-certificates-mono fsharp mono-vbnc nuget \
   && rm -rf /var/lib/apt/lists/* \
 && apt-get -q clean -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
 
 RUN apt-get update && apt-get install -y curl libicu-dev \
 && apt-get -q clean -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
 
-RUN which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin)
+RUN which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin )
