@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM buildpack-deps:jessie-scm
 
 # Install .NET CLI dependencies
 RUN apt-get update \
